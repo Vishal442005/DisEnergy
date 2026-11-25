@@ -1,0 +1,31 @@
+\appendix
+\section{Detailed Proofs of Theoretical Guarantees}
+\label{app:proofs}
+
+\subsection{Proof of Theorem 1 (Exact Affine Photometric Shift and Scale Invariance)}
+Let $\tilde{I} = aI + c\mathbf{1}$ with $a > 0$ and $c \in \mathbb{R}^C$ (in the interior/unclamped regime). Since the discrete Scharr/central-difference filters have zero sum ($\sum_m k_m = 0$), $\nabla \tilde{I}(p) = a\,\nabla I(p)$, so $\lVert \nabla \tilde{I}(p) \rVert_F^2 = a^2 \lVert \nabla I(p) \rVert_F^2$. Over any block $B_k^{(s)}$, the block mean transforms as $\bar{\tilde{\mathbf{I}}}_k = a\bar{\mathbf{I}}_k + c$ and the centered covariance transforms as
+\[
+\tilde{\Sigma}_k^{(s)} = \frac{1}{|B_k^{(s)}|} \sum_{p \in B_k^{(s)}} (\tilde{I}(p) - \bar{\tilde{\mathbf{I}}}_k)(\tilde{I}(p) - \bar{\tilde{\mathbf{I}}}_k)^\top = a^2 \Sigma_k^{(s)}.
+\]
+Substituting into \eqref{eq:eloc} (as $\delta_0 \to 0$) yields $E_{\mathrm{loc}}(\tilde{B}_k^{(s)}) = a\,E_{\mathrm{loc}}(B_k^{(s)})$. Likewise, for $W_2^{\mathrm{diag}}$ and $W_2^{\mathrm{Bures}}$,
+\[
+W_2^{\mathrm{Bures}}(\tilde{\mu}_k, \tilde{\mu}_j) = \sqrt{a^2 \lVert \bar{\mathbf{I}}_k - \bar{\mathbf{I}}_j \rVert_2^2 + a^2 \operatorname{Tr}\!\left(\Sigma_k + \Sigma_j - 2(\Sigma_k^{1/2}\Sigma_j\Sigma_k^{1/2})^{1/2}\right)} = a\,W_2^{\mathrm{Bures}}(\mu_k, \mu_j).
+\]
+Because spatial weights $(\lVert c_k - c_j\rVert_2^\beta + \epsilon)^{-1}$ and $Z_k$ are independent of intensity, $\mathcal{D}_s(aI + c\mathbf{1}) = a\,\mathcal{D}_s(I)$. Finally, quantile normalization maps $a \cdot q_p(\mathcal{D}_s) \mapsto \frac{a\,\mathcal{D}_s - a\,q_{0.5}}{a(q_{99.5} - q_{0.5})} = \widehat{\mathcal{D}}_s(I)$, completing the proof. \qed
+
+\subsection{Proof of Theorem 2 (Noise-Bias Cancellation and $O(1/w_s)$ Attenuation)}
+Let $I_\xi(p) = I(p) + \xi(p)$ with i.i.d.\ $\xi(p) \sim \mathcal{N}(0, \sigma^2 \mathbf{I}_C)$ and block size $n = w_s^d$ ($d=2$).
+\begin{enumerate}
+    \item \textbf{Mean-difference term:} Since $\bar{\xi}_k \sim \mathcal{N}(\mathbf{0}, \frac{\sigma^2}{n}\mathbf{I}_C)$ are independent across disjoint blocks $k \neq j$, $\bar{\xi}_k - \bar{\xi}_j \sim \mathcal{N}(\mathbf{0}, \frac{2\sigma^2}{n}\mathbf{I}_C)$, giving $\mathbb{E}[\lVert \bar{\xi}_k - \bar{\xi}_j \rVert_2] \le \sqrt{2C}\,\frac{\sigma}{w_s}$.
+    \item \textbf{Variance \& gradient bias cancellation:} Let $\kappa_\nabla = \sum_m k_m^2$ be the squared filter norm ($\kappa_{\mathrm{Scharr}} = 2(9+100+9)/32^2 \approx 0.2305$). On stationary regions, $\mathbb{E}[\operatorname{Tr}(\Sigma_k(I_\xi))] = \operatorname{Tr}(\Sigma_k(I)) + C\frac{n-1}{n}\sigma^2$ and $\mathbb{E}[\bar{G}_k(I_\xi)] = \bar{G}_k(I) + 2C\kappa_\nabla \sigma^2$. Because both $k$ and $j$ share identical isotropic noise expectations, taking the difference $E_{\mathrm{loc}}^2(B_k(I_\xi)) - E_{\mathrm{loc}}^2(B_j(I_\xi))$ cancels the $O(\sigma^2)$ noise bias identically, leaving only zero-mean empirical fluctuation of standard error $O(1/\sqrt{n}) = O(1/w_s)$ (with exponential sub-Gaussian / $\chi^2_n$ concentration tails in $w_s^2$).
+    \item \textbf{Rician \& Speckle extensions:} In MRI magnitude data at high SNR ($\lVert I \rVert \gg \sigma$), Rician noise $I_{\mathrm{Ric}} \approx I + \xi_1 + \frac{\xi_2^2}{2I}$ shifts expectations by $\frac{\sigma^2}{2I}$, which likewise cancels locally across adjacent tissue blocks with variance $O(\sigma^2 / w_s^2)$. Under multiplicative ultrasound speckle $I_{\mathrm{sp}} = I(1 + \nu)$ ($\mathbb{E}[\nu]=0, \operatorname{Var}(\nu)=\sigma_\nu^2$), local variance scales proportionally to $I^2 \sigma_\nu^2$, whose block-sample standard error again decays as $O(1/w_s)$ within homogeneous tissue. \qed
+\end{enumerate}
+
+\subsection{Proof of Theorem 3 (Linear Time and Bounded Block-Memory Complexity)}
+For an image with $N$ pixels and $C$ channels: (i) reflect-padded depthwise Scharr convolutions cost $O(N \cdot C)$; (ii) computing block means, gradient means, and centered variances via \texttt{avg\_pool2d} costs $O(N \cdot C)$; (iii) unfolding the $(Hb \times Wb) = (N/w_s^2)$ block grid across $M_r = (2r+1)^2 - 1$ neighbors costs $O(\frac{N}{w_s^2} M_r C)$ for $W_2^{\mathrm{diag}}$ (or $O(\frac{N}{w_s^2} M_r C^3)$ for $W_2^{\mathrm{Bures}}$). Peak tensor storage is $O(\frac{N}{w_s^2} M_r C)$, strictly avoiding $O(N^2)$ global all-pairs transport. \qed
+
+\subsection{Proof of Theorem 4 (Topological Bottleneck Stability)}
+By Cohen--Steiner et al.\ \cite{cohen2007stability}, for any two bounded tame functions $f, g : \Omega \to [0,1]$ on a cubical grid, their sublevel/superlevel persistence diagrams satisfy $d_B(\mathrm{Dgm}_q(f), \mathrm{Dgm}_q(g)) \le \lVert f - g \rVert_\infty$ for every homology dimension $q \ge 0$. Applying this directly to $f = 1 - \mathcal{M}_{\mathrm{fused}}(I')$ and $g = 1 - \mathcal{M}_{\mathrm{fused}}(I)$ yields the stated bottleneck bound. \qed
+
+\subsection{Proof of Theorem 5 (Iso-Mean Texture Separability)}
+Let $\Omega_1, \Omega_2$ satisfy $\bar{\mathbf{I}}_1 = \bar{\mathbf{I}}_2$ while $\operatorname{Tr}(\Sigma_1) > \operatorname{Tr}(\Sigma_2)$. For any boundary pair $k \in \Omega_1, j \in \Omega_2$ with $j \in \mathcal{N}_r(k)$, the intensity-mean gap vanishes ($\lVert \bar{\mathbf{I}}_k - \bar{\mathbf{I}}_j\rVert_2 = 0$), yet $W_2^{\mathrm{diag}}(\mu_k, \mu_j) = \lVert \boldsymbol{\sigma}_k - \boldsymbol{\sigma}_j \rVert_2 > 0$ and $|E_{\mathrm{loc},k} - E_{\mathrm{loc},j}| > 0$ whenever $\gamma > 0$ or gradient densities differ. Because every summand in \eqref{eq:disenergy} is non-negative and weights $(\lVert c_k - c_j\rVert_2^\beta + \epsilon)^{-1} > 0$, $\mathcal{D}_s(k)$ is strictly positive along $\partial \Omega_1$. \qed

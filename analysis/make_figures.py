@@ -9,6 +9,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 
 def _style() -> None:
@@ -63,6 +64,134 @@ def plot_3d_manifolds(
     plt.close(fig)
 
 
+def plot_persistence_and_watershed(
+    image: np.ndarray,
+    fused_manifold: np.ndarray,
+    pred_mask: np.ndarray,
+    gt_mask: np.ndarray,
+    diagrams: dict[int, np.ndarray],
+    betti_curves: np.ndarray,
+    betti_bins: int,
+    out_path: Path,
+    title: str = "Cubical Persistent Homology and Topological Watershed Extraction",
+) -> None:
+    """Fig 3: Input+Overlay, Fused Manifold, H0/H1 Persistence Diagram, and Betti Curves."""
+    _style()
+    fig, axes = plt.subplots(1, 4, figsize=(14.4, 3.5))
+    disp = image[:, :, :3] if (image.ndim == 3 and image.shape[-1] >= 3) else np.squeeze(image)
+
+    axes[0].imshow(disp, cmap="gray" if disp.ndim == 2 else None)
+    axes[0].contour(np.squeeze(gt_mask).astype(float), levels=[0.5], colors=["#00e676"], linewidths=1.5)
+    axes[0].contour(np.squeeze(pred_mask).astype(float), levels=[0.5], colors=["#ff3b30"], linewidths=1.5, linestyles="--")
+    axes[0].set_title("GT (green) vs. Pred (red)")
+    axes[0].axis("off")
+
+    im = axes[1].imshow(np.squeeze(fused_manifold), cmap="viridis", vmin=0.0, vmax=1.0)
+    axes[1].set_title(r"Fused Manifold $\mathcal{M}_{\mathrm{fused}}$")
+    axes[1].axis("off")
+    fig.colorbar(im, ax=axes[1], fraction=0.046, pad=0.04)
+
+    ax_d = axes[2]
+    ax_d.plot([0, 1], [0, 1], "k--", linewidth=1.0, alpha=0.6)
+    for dim, color, lbl in [(0, "#1f77b4", r"$H_0$"), (1, "#d62728", r"$H_1$")]:
+        dgm = diagrams.get(dim, np.zeros((0, 2)))
+        if len(dgm) > 0:
+            ax_d.scatter(dgm[:, 0], dgm[:, 1], s=18, alpha=0.75, c=color, label=lbl)
+    ax_d.set_xlim(0.0, 1.02)
+    ax_d.set_ylim(0.0, 1.02)
+    ax_d.set_xlabel("Birth")
+    ax_d.set_ylabel("Death")
+    ax_d.set_title("Persistence Diagram")
+    ax_d.legend(loc="lower right", fontsize=8)
+    ax_d.grid(True, linestyle=":", alpha=0.4)
+
+    ax_b = axes[3]
+    t_grid = np.linspace(0.0, 1.0, betti_bins)
+    b0 = betti_curves[:betti_bins]
+    b1 = betti_curves[betti_bins : 2 * betti_bins]
+    ax_b.plot(t_grid, b0, color="#1f77b4", linewidth=2.0, label=r"$\beta_0(t)$")
+    ax_b.plot(t_grid, b1, color="#d62728", linewidth=2.0, label=r"$\beta_1(t)$")
+    ax_b.set_xlabel("Superlevel Filtration $1 - t$")
+    ax_b.set_ylabel("Betti Number")
+    ax_b.set_title("Betti Curves")
+    ax_b.legend(fontsize=8)
+    ax_b.grid(True, linestyle=":", alpha=0.4)
+
+    fig.suptitle(title, fontweight="bold", y=1.03)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path)
+    fig.savefig(out_path.with_suffix(".pdf"))
+    plt.close(fig)
+
+
+def plot_multiscale_diagnostics(
+    pilot_csv: Path,
+    out_path: Path,
+    title: str = "Multi-Scale Diagnostic Trade-Off (Fine vs. Mid vs. Large vs. Watershed)",
+) -> None:
+    """Fig 4: Grouped bar chart comparing DSC, IoU, Boundary F1, and Specificity across scales."""
+    _style()
+    df = pd.read_csv(pilot_csv)
+    metrics = ["dsc", "iou", "boundary_f1", "specificity"]
+    order = ["Fine_2", "Mid_8", "Large_32", "Fused_Otsu", "DisEnergy_Watershed"]
+    present = [m for m in order if m in set(df["method"])]
+    summary = df.groupby("method")[metrics].mean().loc[present]
+
+    x = np.arange(len(present))
+    width = 0.19
+    fig, ax = plt.subplots(figsize=(8.6, 4.4))
+    colors = ["#4c72b0", "#55a868", "#dd8452", "#c44e52"]
+    for idx, m in enumerate(metrics):
+        ax.bar(x + (idx - 1.5) * width, summary[m].to_numpy(), width, label=m.upper().replace("_", " "), color=colors[idx])
+
+    ax.set_xticks(x)
+    ax.set_xticklabels([p.replace("_", "\n") for p in present], fontsize=9)
+    ax.set_ylim(0.0, 1.05)
+    ax.set_ylabel("Score")
+    ax.set_title(title, fontweight="bold")
+    ax.grid(True, axis="y", linestyle="--", alpha=0.35)
+    ax.legend(ncol=4, loc="upper center", bbox_to_anchor=(0.5, 1.02), fontsize=8)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path)
+    fig.savefig(out_path.with_suffix(".pdf"))
+    plt.close(fig)
+
+
+def plot_qualitative_and_failures(
+    cases: list[tuple[str, np.ndarray, np.ndarray, np.ndarray, np.ndarray, float]],
+    out_path: Path,
+    title: str = "Qualitative Successes and Worst-Decile Failure Modes",
+) -> None:
+    """Fig 8: Each tuple is (label, img, gt_mask, fused_manifold, pred_mask, dsc)."""
+    _style()
+    n_rows = len(cases)
+    fig, axes = plt.subplots(n_rows, 3, figsize=(9.2, 2.8 * n_rows))
+    if n_rows == 1:
+        axes = np.expand_dims(axes, axis=0)
+
+    for r, (label, img, gt, fused, pred, dsc) in enumerate(cases):
+        disp = img[:, :, :3] if (img.ndim == 3 and img.shape[-1] >= 3) else np.squeeze(img)
+        axes[r, 0].imshow(disp, cmap="gray" if disp.ndim == 2 else None)
+        axes[r, 0].set_title(f"{label} | Input", fontsize=9)
+        axes[r, 0].axis("off")
+
+        axes[r, 1].imshow(np.squeeze(fused), cmap="viridis", vmin=0.0, vmax=1.0)
+        axes[r, 1].set_title(r"$\mathcal{M}_{\mathrm{fused}}$", fontsize=9)
+        axes[r, 1].axis("off")
+
+        axes[r, 2].imshow(disp, cmap="gray" if disp.ndim == 2 else None)
+        axes[r, 2].contour(np.squeeze(gt).astype(float), levels=[0.5], colors=["#00e676"], linewidths=1.5)
+        axes[r, 2].contour(np.squeeze(pred).astype(float), levels=[0.5], colors=["#ff3b30"], linewidths=1.5, linestyles="--")
+        axes[r, 2].set_title(f"GT vs. Pred (DSC={dsc:.3f})", fontsize=9)
+        axes[r, 2].axis("off")
+
+    fig.suptitle(title, fontweight="bold", y=1.01)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path)
+    fig.savefig(out_path.with_suffix(".pdf"))
+    plt.close(fig)
+
+
 def plot_critical_difference(
     mean_ranks: dict[str, float],
     cd: float,
@@ -81,7 +210,6 @@ def plot_critical_difference(
         ax.vlines(r, k + 0.45, k + 0.75, color="black", linewidth=1.0)
         ax.text(r, k + 0.85, str(r), ha="center", va="bottom", fontsize=9)
 
-    # CD bar
     ax.hlines(k + 1.35, 1, 1 + cd, color="crimson", linewidth=2.5)
     ax.text(1 + 0.5 * cd, k + 1.48, f"CD = {cd:.2f}", ha="center", va="bottom", color="crimson", fontweight="bold")
 
@@ -90,7 +218,6 @@ def plot_critical_difference(
         ax.plot([rank], [y], "o", color="#1f77b4", markersize=7)
         ax.text(rank + 0.12, y, f"{name} ({rank:.2f})", va="center", ha="left", fontsize=9)
 
-    # Clique bars for pairs within CD
     clique_y = k + 0.15
     for i in range(k):
         j = i
@@ -149,7 +276,7 @@ def generate_graphical_abstract(
 ) -> None:
     """Generate Elsevier-compliant wide landscape Graphical Abstract (>= 1328 x 531 px @ 300 dpi)."""
     _style()
-    fig = plt.figure(figsize=(10.0, 4.0), dpi=300)  # 3000 x 1200 px (> 1328 x 531 px)
+    fig = plt.figure(figsize=(10.0, 4.0), dpi=300)
     gs = fig.add_gridspec(1, 4, wspace=0.25)
 
     ax1 = fig.add_subplot(gs[0, 0])

@@ -545,6 +545,43 @@ def prepare_eurosat(raw_dir: Path, out_dir: Path, image_size: int = 128, max_sam
     return records
 
 
+def prepare_ph2(raw_dir: Path, out_dir: Path, image_size: int = 256, max_samples: int | None = None) -> list[SampleRecord]:
+    """Preprocess PH2 dermoscopy dataset (200 lesions: Common Nevus, Atypical Nevus, Melanoma)."""
+    import csv
+
+    csv_path = raw_dir / "PH2_simple_dataset.csv"
+    img_dir = raw_dir / "images"
+    if not (csv_path.exists() and img_dir.exists()):
+        raise FileNotFoundError(f"Expected PH2_simple_dataset.csv and images/ under {raw_dir}")
+
+    label_map = {"common nevus": 0, "atypical nevus": 1, "melanoma": 2}
+    records: list[SampleRecord] = []
+    with csv_path.open(encoding="utf-8-sig") as fh:
+        for row in csv.DictReader(fh):
+            name = row["image_name"].strip()
+            diag = row["diagnosis"].strip().lower()
+            img_path = img_dir / f"{name}.jpg"
+            if not img_path.exists() or diag not in label_map:
+                continue
+            img = np.asarray(Image.open(img_path).convert("RGB"), dtype=np.float32) / 255.0
+            sid = f"ph2_{name}"
+            img_p, _ = _save_pair(out_dir, sid, img, None, image_size=image_size)
+            records.append(
+                SampleRecord(
+                    sample_id=sid,
+                    subject_id=sid,
+                    dataset="ph2_ood",
+                    image_path=img_p,
+                    mask_path=None,
+                    label=label_map[diag],
+                    domain="biomedical_dermoscopy",
+                )
+            )
+            if max_samples is not None and len(records) >= max_samples:
+                break
+    return records
+
+
 def build_leak_free_nested_splits(
     records: Sequence[SampleRecord],
     n_folds: int = 5,
@@ -651,6 +688,8 @@ def main() -> None:
         records = prepare_drive(ds_raw, ds_out, image_size=args.image_size, max_samples=args.max_samples)
     elif args.dataset == "eurosat":
         records = prepare_eurosat(ds_raw, ds_out, image_size=args.image_size, max_samples=args.max_samples or 1000)
+    elif args.dataset == "ph2_ood":
+        records = prepare_ph2(ds_raw, ds_out, image_size=args.image_size, max_samples=args.max_samples)
     else:
         raise NotImplementedError(
             f"Place raw '{args.dataset}' archive under {ds_raw} and wire its folder adapter."
