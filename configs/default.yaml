@@ -1,0 +1,32 @@
+seed: 42
+device: "auto"
+
+operator:
+  block_sizes: [2, 8, 32]      # Fine (F), Mid (M), Large (L) default; ablates [1,2,4], [8,16], [32,64]
+  radius: 2                    # Local block neighbourhood radius r -> (2r+1)x(2r+1)
+  gamma: 0.5                   # Weight on local intensity variance Tr(Sigma)
+  beta: 1.0                    # Spatial distance decay exponent
+  eta: 1.0                     # Balance between |Delta E_loc| and W2 divergence
+  epsilon: 1.0e-4              # Distance denominator stabilizer
+  gradient_filter: "scharr"    # "scharr" | "sobel" | "central"
+  energy_mode: "homogeneous"   # "homogeneous" (first-order sqrt) | "quadratic"
+  w2_mode: "diagonal"          # "diagonal" | "bures"
+  norm_mode: "quantile"        # "quantile" | "minmax"
+  quantile_clip: [0.005, 0.995]
+  fusion_mode: "moran_entropy" # "moran_entropy" | "inverse_entropy" | "uniform"
+
+topology:
+  filtration: "superlevel"
+  min_persistence_ratio: 0.08
+  fill_enclosed_basins: true
+  use_border_bg_prior: true
+  betti_bins: 32
+  landscape_layers: 3
+
+experiments:
+  image_size: 256
+  n_folds: 5
+  seeds: [42, 123, 2026]
+  scarcity_fractions: [0.01, 0.05, 0.10, 0.25, 1.00]
+  snr_levels_db: [25.0, 20.0, 15.0, 10.0]
+  noise_types: ["gaussian", "rician", "speckle"]

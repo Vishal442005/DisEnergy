@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "disenergy"
+version = "0.1.0"
+description = "DisEnergy: Multi-scale Dirichlet-Wasserstein 3D energy manifolds for box-free segmentation and topological classification"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26,<2.2",
+    "scipy>=1.11",
+    "torch>=2.1",
+    "torchvision>=0.16",
+    "scikit-image>=0.22",
+    "opencv-python-headless>=4.8",
+    "gudhi>=3.9",
+    "scikit-learn>=1.3",
+    "statsmodels>=0.14",
+    "scikit-posthocs>=0.9",
+    "nibabel>=5.1",
+    "SimpleITK>=2.3",
+    "POT>=0.9",
+    "matplotlib>=3.8",
+    "pandas>=2.1",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+
+[tool.setuptools.packages.find]
+include = ["disenergy*", "baselines*", "analysis*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+ignore = ["EXE002"]

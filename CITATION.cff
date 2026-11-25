@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use DisEnergy in your research, please cite this repository and the accompanying manuscript."
+title: "DisEnergy: Multi-Scale Dirichlet-Wasserstein 3D Energy Manifolds for Box-Free Segmentation and Topological Classification"
+type: software
+authors:
+  - family-names: "DisEnergy"
+    given-names: "Authors"
+version: "0.1.0"
+date-released: "2026-11-25"
+license: "MIT"

@@ -1,0 +1,68 @@
+\section{The DisEnergy Framework and Theoretical Analysis}
+\label{sec:theory}
+
+Let $I: \Omega \subset \mathbb{Z}^d \to [0,1]^C$ denote a $d$-dimensional ($d \in \{2,3\}$), $C$-channel image or volumetric scan padded with boundary reflection. At each scale tier $s \in \{\mathrm{F}, \mathrm{M}, \mathrm{L}\}$, $\Omega$ is partitioned into non-overlapping blocks $B_k^{(s)}$ of side $w_s \ge 1$ with block-grid centroids $c_k$.
+
+\subsection{Dimensionally Homogeneous Local Internal Energy}
+Using a normalized discrete derivative operator $\nabla I(p)$ (Scharr filters in 2D; central differences in 3D), define the local internal energy of block $B_k^{(s)}$ by coupling mean Dirichlet gradient energy with the trace of the $C \times C$ block covariance matrix $\Sigma_k^{(s)}$:
+\begin{equation}
+E_{\mathrm{loc}}\!\left(B_k^{(s)}\right) = \sqrt{\frac{1}{\lvert B_k^{(s)}\rvert}\sum_{p \in B_k^{(s)}} \lVert \nabla I(p)\rVert_F^2 + \gamma\,\operatorname{Tr}\!\left(\Sigma_k^{(s)}\right) + \delta_0},
+\label{eq:eloc}
+\end{equation}
+where $\gamma \ge 0$ balances gradient roughness against regional dispersion and $\delta_0 = 10^{-12}$ ensures smoothness at zero. At the single-pixel limit ($w_{\mathrm{F}} = 1$), $\Sigma_k^{(\mathrm{F})} = \mathbf{0}$ and \eqref{eq:eloc} reduces smoothly to $\lVert \nabla I(p)\rVert_F$. Crucially, taking the square root aligns $E_{\mathrm{loc}}$ to first-order intensity units $[I]$, matching the Wasserstein-2 term below.
+
+\subsection{The DisEnergy Operator and Multi-Scale 3D Manifold}
+Over a local block neighborhood $\mathcal{N}_r(k) \setminus \{k\}$ of radius $r$, define DisEnergy as the distance-weighted structural and distributional divergence:
+\begin{equation}
+\mathcal{D}_s(k) = \frac{1}{Z_k} \sum_{j \in \mathcal{N}_r(k) \setminus \{k\}} \frac{\left\lvert E_{\mathrm{loc}}\!\left(B_k^{(s)}\right) - E_{\mathrm{loc}}\!\left(B_j^{(s)}\right)\right\rvert + \eta\,W_2\!\left(\mu_k^{(s)}, \mu_j^{(s)}\right)}{\lVert c_k - c_j\rVert_2^\beta + \epsilon},
+\label{eq:disenergy}
+\end{equation}
+with border normalization $Z_k = \sum_{j \in \mathcal{N}_r(k)\setminus\{k\}} (\lVert c_k - c_j\rVert_2^\beta + \epsilon)^{-1}$, decay $\beta > 0$, balance $\eta \ge 0$, and stabilizer $\epsilon > 0$. For multi-channel Gaussian block approximations $\mu_k = \mathcal{N}(\bar{\mathbf{I}}_k, \Sigma_k)$, we support both the exact $O(C)$ diagonal-covariance metric $W_2^{\mathrm{diag}}(\mu_k, \mu_j) = \sqrt{\lVert \bar{\mathbf{I}}_k - \bar{\mathbf{I}}_j\rVert_2^2 + \lVert \boldsymbol{\sigma}_k - \boldsymbol{\sigma}_j\rVert_2^2}$ and the full $C \times C$ Bures--Wasserstein distance:
+\begin{equation}
+W_2^{\mathrm{Bures}}(\mu_k, \mu_j) = \sqrt{\lVert \bar{\mathbf{I}}_k - \bar{\mathbf{I}}_j\rVert_2^2 + \operatorname{Tr}\!\left(\Sigma_k + \Sigma_j - 2\left(\Sigma_k^{1/2}\Sigma_j\Sigma_k^{1/2}\right)^{1/2}\right)}.
+\label{eq:bures}
+\end{equation}
+
+Each field $\mathcal{D}_s$ is interpolated back to full spatial resolution and robustly normalized via $[q_{0.5}, q_{99.5}]$ quantile clipping to $\widehat{\mathcal{D}}_s \in [0,1]$, yielding per-scale elevation surfaces $\mathcal{M}_s$. Scales are fused without training via Moran's-$I$ spatial-coherence-regularized inverse entropy:
+\begin{equation}
+\mathcal{M}_{\mathrm{fused}}(x) = \sum_{s \in \{\mathrm{F},\mathrm{M},\mathrm{L}\}} \omega_s\,\widehat{\mathcal{D}}_s(x), \qquad \omega_s \propto \frac{\max(I_{\mathrm{Moran}}(\widehat{\mathcal{D}}_s), 0)}{H(\widehat{\mathcal{D}}_s) + \tau_H},
+\label{eq:fusion}
+\end{equation}
+which suppresses scales corrupted by spatially uncorrelated speckle or white noise ($I_{\mathrm{Moran}} \approx 0$) while preventing outlier-driven histogram entropy collapse.
+
+\subsection{Analytical Guarantees}
+
+\begin{theorem}[Affine Photometric Shift and Scale Invariance]
+For any unclamped image $I$, global intensity offset $c \in \mathbb{R}^C$, and global positive contrast multiplier $a > 0$, in the limit $\delta_0 \to 0$:
+\[
+\mathcal{D}_s(aI + c\mathbf{1}) = a\,\mathcal{D}_s(I), \qquad \widehat{\mathcal{D}}_s(aI + c\mathbf{1}) = \widehat{\mathcal{D}}_s(I).
+\]
+\end{theorem}
+\begin{proof}
+Since $\nabla(aI + c\mathbf{1}) = a\nabla I$, $\bar{\mathbf{I}}_k(aI+c\mathbf{1}) = a\bar{\mathbf{I}}_k + c$, and $\Sigma_k(aI+c\mathbf{1}) = a^2 \Sigma_k$, both $E_{\mathrm{loc}}$ in \eqref{eq:eloc} and $W_2$ in \eqref{eq:bures} satisfy positive homogeneity of degree $1$ and shift invariance of differences: $|E_{\mathrm{loc},k}(aI+c\mathbf{1}) - E_{\mathrm{loc},j}(aI+c\mathbf{1})| = a|E_{\mathrm{loc},k}(I) - E_{\mathrm{loc},j}(I)|$ and $W_2(\mu_k(aI+c\mathbf{1}), \mu_j(aI+c\mathbf{1})) = a W_2(\mu_k, \mu_j)$. Linear quantile normalization cancels the factor $a > 0$, yielding $\widehat{\mathcal{D}}_s(aI+c\mathbf{1}) = \widehat{\mathcal{D}}_s(I)$.
+\end{proof}
+
+\begin{theorem}[Noise-Bias Cancellation and $O(1/w_s)$ Stochastic Attenuation]
+Let $I_\xi = I + \xi$ with i.i.d.\ additive noise $\xi(p) \sim \mathcal{N}(0, \sigma^2 \mathbf{I}_C)$. Then:
+(i) the isotropic noise expectation bias in $E_{\mathrm{loc}}^2(B_k)$ cancels identically between neighboring blocks $k$ and $j$; and
+(ii) the stochastic fluctuation $\operatorname{Std}_\xi[\mathcal{D}_s(I_\xi)]$ decays as $O(\sigma / w_s)$ with block width $w_s$ (with corresponding high-probability tail decay exponential in $w_s^2$).
+\end{theorem}
+\begin{proof}[Proof Sketch]
+Within block $B_k$ of $n = w_s^d$ elements ($d=2$), the sample mean perturbation $\bar{\xi}_k \sim \mathcal{N}(0, (\sigma^2 / w_s^2)\mathbf{I}_C)$ yields $\mathbb{E}[\lVert \bar{\xi}_k - \bar{\xi}_j\rVert_2] = O(\sigma / w_s)$. Similarly, the block variance and mean squared gradient admit identical stationary noise expectations across $k$ and $j$, so their difference eliminates the additive $\sigma^2$ floor, leaving cross-block sample fluctuations of standard error $O(1/\sqrt{n}) = O(1/w_s)$ in 2D ($O(w_s^{-3/2})$ in 3D).
+\end{proof}
+
+\begin{theorem}[Linear Time and Bounded Block-Memory Complexity]
+For an image of $N = H \times W$ pixels, $C$ channels, block size $w_s$, and neighborhood radius $r$ with $M_r = (2r+1)^2 - 1$, computing $\mathcal{D}_s$ via separable pooling and local window unfolding requires $O(N \cdot C + \frac{N}{w_s^2} M_r C)$ operations under $W_2^{\mathrm{diag}}$ (or $O(\frac{N}{w_s^2} M_r C^3)$ under $W_2^{\mathrm{Bures}}$), avoiding $O(N^2)$ global pairwise transport.
+\end{theorem}
+
+\begin{theorem}[Topological Bottleneck Stability]
+For cubical persistence diagrams $\mathrm{Dgm}_q$ ($q \in \{0,1\}$ in 2D; $q \in \{0,1,2\}$ in 3D) constructed on $\mathcal{M}_{\mathrm{fused}}$, any perturbation $I' = I + \xi$ satisfies
+\[
+d_B\!\left(\mathrm{Dgm}_q(\mathcal{M}_{\mathrm{fused}}(I')),\, \mathrm{Dgm}_q(\mathcal{M}_{\mathrm{fused}}(I))\right) \le \lVert \mathcal{M}_{\mathrm{fused}}(I') - \mathcal{M}_{\mathrm{fused}}(I)\rVert_\infty,
+\]
+where $d_B$ is the bottleneck distance (following Cohen-Steiner et al.).
+\end{theorem}
+
+\begin{theorem}[Iso-Mean Texture Separability]
+Suppose a foreground region $\Omega_1$ and adjacent background $\Omega_2$ share identical local mean intensity ($\bar{\mathbf{I}}_1 = \bar{\mathbf{I}}_2$) but differ in dispersion ($\operatorname{Tr}(\Sigma_1) \neq \operatorname{Tr}(\Sigma_2)$) or gradient density. Then for any boundary pair $(k,j) \in \Omega_1 \times \Omega_2$ inside $\mathcal{N}_r$, both $|E_{\mathrm{loc},k} - E_{\mathrm{loc},j}| > 0$ and $W_2(\mu_k, \mu_j) > 0$, guaranteeing a strictly positive boundary ridge on $\mathcal{M}_{\mathrm{fused}}$ where mean-intensity detectors vanish.
+\end{theorem}

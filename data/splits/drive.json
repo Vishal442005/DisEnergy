@@ -1,0 +1,616 @@
+{
+  "n_folds": 5,
+  "seed": 42,
+  "n_samples": 40,
+  "n_subjects": 40,
+  "records": [
+    {
+      "sample_id": "drive_21_training",
+      "subject_id": "drive_21_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_21_training_img.npy",
+      "mask_path": "data/processed/drive/drive_21_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_22_training",
+      "subject_id": "drive_22_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_22_training_img.npy",
+      "mask_path": "data/processed/drive/drive_22_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_23_training",
+      "subject_id": "drive_23_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_23_training_img.npy",
+      "mask_path": "data/processed/drive/drive_23_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_24_training",
+      "subject_id": "drive_24_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_24_training_img.npy",
+      "mask_path": "data/processed/drive/drive_24_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_25_training",
+      "subject_id": "drive_25_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_25_training_img.npy",
+      "mask_path": "data/processed/drive/drive_25_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_26_training",
+      "subject_id": "drive_26_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_26_training_img.npy",
+      "mask_path": "data/processed/drive/drive_26_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_27_training",
+      "subject_id": "drive_27_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_27_training_img.npy",
+      "mask_path": "data/processed/drive/drive_27_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_28_training",
+      "subject_id": "drive_28_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_28_training_img.npy",
+      "mask_path": "data/processed/drive/drive_28_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_29_training",
+      "subject_id": "drive_29_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_29_training_img.npy",
+      "mask_path": "data/processed/drive/drive_29_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_30_training",
+      "subject_id": "drive_30_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_30_training_img.npy",
+      "mask_path": "data/processed/drive/drive_30_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_31_training",
+      "subject_id": "drive_31_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_31_training_img.npy",
+      "mask_path": "data/processed/drive/drive_31_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_32_training",
+      "subject_id": "drive_32_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_32_training_img.npy",
+      "mask_path": "data/processed/drive/drive_32_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_33_training",
+      "subject_id": "drive_33_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_33_training_img.npy",
+      "mask_path": "data/processed/drive/drive_33_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_34_training",
+      "subject_id": "drive_34_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_34_training_img.npy",
+      "mask_path": "data/processed/drive/drive_34_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_35_training",
+      "subject_id": "drive_35_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_35_training_img.npy",
+      "mask_path": "data/processed/drive/drive_35_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_36_training",
+      "subject_id": "drive_36_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_36_training_img.npy",
+      "mask_path": "data/processed/drive/drive_36_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_37_training",
+      "subject_id": "drive_37_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_37_training_img.npy",
+      "mask_path": "data/processed/drive/drive_37_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_38_training",
+      "subject_id": "drive_38_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_38_training_img.npy",
+      "mask_path": "data/processed/drive/drive_38_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_39_training",
+      "subject_id": "drive_39_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_39_training_img.npy",
+      "mask_path": "data/processed/drive/drive_39_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_40_training",
+      "subject_id": "drive_40_training",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_40_training_img.npy",
+      "mask_path": "data/processed/drive/drive_40_training_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_01_test",
+      "subject_id": "drive_01_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_01_test_img.npy",
+      "mask_path": "data/processed/drive/drive_01_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_02_test",
+      "subject_id": "drive_02_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_02_test_img.npy",
+      "mask_path": "data/processed/drive/drive_02_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_03_test",
+      "subject_id": "drive_03_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_03_test_img.npy",
+      "mask_path": "data/processed/drive/drive_03_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_04_test",
+      "subject_id": "drive_04_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_04_test_img.npy",
+      "mask_path": "data/processed/drive/drive_04_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_05_test",
+      "subject_id": "drive_05_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_05_test_img.npy",
+      "mask_path": "data/processed/drive/drive_05_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_06_test",
+      "subject_id": "drive_06_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_06_test_img.npy",
+      "mask_path": "data/processed/drive/drive_06_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_07_test",
+      "subject_id": "drive_07_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_07_test_img.npy",
+      "mask_path": "data/processed/drive/drive_07_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_08_test",
+      "subject_id": "drive_08_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_08_test_img.npy",
+      "mask_path": "data/processed/drive/drive_08_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_09_test",
+      "subject_id": "drive_09_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_09_test_img.npy",
+      "mask_path": "data/processed/drive/drive_09_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_10_test",
+      "subject_id": "drive_10_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_10_test_img.npy",
+      "mask_path": "data/processed/drive/drive_10_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_11_test",
+      "subject_id": "drive_11_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_11_test_img.npy",
+      "mask_path": "data/processed/drive/drive_11_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_12_test",
+      "subject_id": "drive_12_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_12_test_img.npy",
+      "mask_path": "data/processed/drive/drive_12_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_13_test",
+      "subject_id": "drive_13_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_13_test_img.npy",
+      "mask_path": "data/processed/drive/drive_13_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_14_test",
+      "subject_id": "drive_14_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_14_test_img.npy",
+      "mask_path": "data/processed/drive/drive_14_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_15_test",
+      "subject_id": "drive_15_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_15_test_img.npy",
+      "mask_path": "data/processed/drive/drive_15_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_16_test",
+      "subject_id": "drive_16_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_16_test_img.npy",
+      "mask_path": "data/processed/drive/drive_16_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_17_test",
+      "subject_id": "drive_17_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_17_test_img.npy",
+      "mask_path": "data/processed/drive/drive_17_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_18_test",
+      "subject_id": "drive_18_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_18_test_img.npy",
+      "mask_path": "data/processed/drive/drive_18_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_19_test",
+      "subject_id": "drive_19_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_19_test_img.npy",
+      "mask_path": "data/processed/drive/drive_19_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    },
+    {
+      "sample_id": "drive_20_test",
+      "subject_id": "drive_20_test",
+      "dataset": "drive",
+      "image_path": "data/processed/drive/drive_20_test_img.npy",
+      "mask_path": "data/processed/drive/drive_20_test_msk.npy",
+      "label": 1,
+      "domain": "biomedical_retinal"
+    }
+  ],
+  "folds": [
+    {
+      "fold": 0,
+      "train_ids": [
+        "drive_21_training",
+        "drive_22_training",
+        "drive_23_training",
+        "drive_24_training",
+        "drive_26_training",
+        "drive_27_training",
+        "drive_28_training",
+        "drive_29_training",
+        "drive_32_training",
+        "drive_34_training",
+        "drive_35_training",
+        "drive_38_training",
+        "drive_39_training",
+        "drive_02_test",
+        "drive_04_test",
+        "drive_05_test",
+        "drive_06_test",
+        "drive_09_test",
+        "drive_10_test",
+        "drive_11_test",
+        "drive_13_test",
+        "drive_14_test",
+        "drive_15_test",
+        "drive_16_test",
+        "drive_20_test"
+      ],
+      "val_ids": [
+        "drive_30_training",
+        "drive_31_training",
+        "drive_01_test",
+        "drive_03_test",
+        "drive_12_test",
+        "drive_17_test",
+        "drive_19_test"
+      ],
+      "test_ids": [
+        "drive_25_training",
+        "drive_33_training",
+        "drive_36_training",
+        "drive_37_training",
+        "drive_40_training",
+        "drive_07_test",
+        "drive_08_test",
+        "drive_18_test"
+      ]
+    },
+    {
+      "fold": 1,
+      "train_ids": [
+        "drive_21_training",
+        "drive_22_training",
+        "drive_23_training",
+        "drive_24_training",
+        "drive_25_training",
+        "drive_26_training",
+        "drive_35_training",
+        "drive_36_training",
+        "drive_39_training",
+        "drive_40_training",
+        "drive_01_test",
+        "drive_02_test",
+        "drive_03_test",
+        "drive_04_test",
+        "drive_05_test",
+        "drive_07_test",
+        "drive_08_test",
+        "drive_09_test",
+        "drive_11_test",
+        "drive_13_test",
+        "drive_14_test",
+        "drive_16_test",
+        "drive_17_test",
+        "drive_18_test",
+        "drive_19_test"
+      ],
+      "val_ids": [
+        "drive_28_training",
+        "drive_31_training",
+        "drive_32_training",
+        "drive_33_training",
+        "drive_37_training",
+        "drive_38_training",
+        "drive_10_test"
+      ],
+      "test_ids": [
+        "drive_27_training",
+        "drive_29_training",
+        "drive_30_training",
+        "drive_34_training",
+        "drive_06_test",
+        "drive_12_test",
+        "drive_15_test",
+        "drive_20_test"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_ids": [
+        "drive_23_training",
+        "drive_24_training",
+        "drive_27_training",
+        "drive_28_training",
+        "drive_29_training",
+        "drive_30_training",
+        "drive_31_training",
+        "drive_33_training",
+        "drive_34_training",
+        "drive_35_training",
+        "drive_39_training",
+        "drive_40_training",
+        "drive_01_test",
+        "drive_03_test",
+        "drive_04_test",
+        "drive_06_test",
+        "drive_07_test",
+        "drive_09_test",
+        "drive_11_test",
+        "drive_12_test",
+        "drive_15_test",
+        "drive_16_test",
+        "drive_17_test",
+        "drive_19_test",
+        "drive_20_test"
+      ],
+      "val_ids": [
+        "drive_25_training",
+        "drive_36_training",
+        "drive_37_training",
+        "drive_02_test",
+        "drive_08_test",
+        "drive_13_test",
+        "drive_18_test"
+      ],
+      "test_ids": [
+        "drive_21_training",
+        "drive_22_training",
+        "drive_26_training",
+        "drive_32_training",
+        "drive_38_training",
+        "drive_05_test",
+        "drive_10_test",
+        "drive_14_test"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_ids": [
+        "drive_21_training",
+        "drive_22_training",
+        "drive_25_training",
+        "drive_26_training",
+        "drive_27_training",
+        "drive_29_training",
+        "drive_30_training",
+        "drive_31_training",
+        "drive_33_training",
+        "drive_34_training",
+        "drive_35_training",
+        "drive_37_training",
+        "drive_38_training",
+        "drive_40_training",
+        "drive_01_test",
+        "drive_03_test",
+        "drive_05_test",
+        "drive_06_test",
+        "drive_07_test",
+        "drive_08_test",
+        "drive_09_test",
+        "drive_12_test",
+        "drive_15_test",
+        "drive_18_test",
+        "drive_19_test"
+      ],
+      "val_ids": [
+        "drive_28_training",
+        "drive_32_training",
+        "drive_36_training",
+        "drive_39_training",
+        "drive_10_test",
+        "drive_14_test",
+        "drive_20_test"
+      ],
+      "test_ids": [
+        "drive_23_training",
+        "drive_24_training",
+        "drive_02_test",
+        "drive_04_test",
+        "drive_11_test",
+        "drive_13_test",
+        "drive_16_test",
+        "drive_17_test"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_ids": [
+        "drive_21_training",
+        "drive_23_training",
+        "drive_26_training",
+        "drive_27_training",
+        "drive_29_training",
+        "drive_30_training",
+        "drive_34_training",
+        "drive_37_training",
+        "drive_38_training",
+        "drive_40_training",
+        "drive_02_test",
+        "drive_04_test",
+        "drive_05_test",
+        "drive_06_test",
+        "drive_07_test",
+        "drive_08_test",
+        "drive_10_test",
+        "drive_11_test",
+        "drive_12_test",
+        "drive_13_test",
+        "drive_14_test",
+        "drive_15_test",
+        "drive_16_test",
+        "drive_17_test",
+        "drive_20_test"
+      ],
+      "val_ids": [
+        "drive_22_training",
+        "drive_24_training",
+        "drive_25_training",
+        "drive_32_training",
+        "drive_33_training",
+        "drive_36_training",
+        "drive_18_test"
+      ],
+      "test_ids": [
+        "drive_28_training",
+        "drive_31_training",
+        "drive_35_training",
+        "drive_39_training",
+        "drive_01_test",
+        "drive_03_test",
+        "drive_09_test",
+        "drive_19_test"
+      ]
+    }
+  ],
+  "splits_sha256": "a1b30d913d2eb209"
+}

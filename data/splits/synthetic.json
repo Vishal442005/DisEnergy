@@ -1,0 +1,616 @@
+{
+  "n_folds": 5,
+  "seed": 42,
+  "n_samples": 40,
+  "n_subjects": 13,
+  "records": [
+    {
+      "sample_id": "syn_0000",
+      "subject_id": "subj_000",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0000_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0000_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0001",
+      "subject_id": "subj_001",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0001_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0001_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0002",
+      "subject_id": "subj_002",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0002_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0002_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0003",
+      "subject_id": "subj_003",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0003_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0003_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0004",
+      "subject_id": "subj_004",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0004_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0004_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0005",
+      "subject_id": "subj_005",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0005_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0005_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0006",
+      "subject_id": "subj_006",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0006_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0006_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0007",
+      "subject_id": "subj_007",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0007_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0007_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0008",
+      "subject_id": "subj_008",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0008_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0008_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0009",
+      "subject_id": "subj_009",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0009_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0009_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0010",
+      "subject_id": "subj_010",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0010_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0010_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0011",
+      "subject_id": "subj_011",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0011_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0011_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0012",
+      "subject_id": "subj_012",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0012_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0012_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0013",
+      "subject_id": "subj_000",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0013_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0013_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0014",
+      "subject_id": "subj_001",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0014_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0014_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0015",
+      "subject_id": "subj_002",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0015_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0015_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0016",
+      "subject_id": "subj_003",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0016_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0016_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0017",
+      "subject_id": "subj_004",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0017_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0017_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0018",
+      "subject_id": "subj_005",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0018_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0018_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0019",
+      "subject_id": "subj_006",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0019_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0019_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0020",
+      "subject_id": "subj_007",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0020_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0020_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0021",
+      "subject_id": "subj_008",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0021_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0021_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0022",
+      "subject_id": "subj_009",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0022_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0022_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0023",
+      "subject_id": "subj_010",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0023_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0023_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0024",
+      "subject_id": "subj_011",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0024_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0024_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0025",
+      "subject_id": "subj_012",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0025_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0025_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0026",
+      "subject_id": "subj_000",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0026_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0026_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0027",
+      "subject_id": "subj_001",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0027_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0027_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0028",
+      "subject_id": "subj_002",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0028_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0028_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0029",
+      "subject_id": "subj_003",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0029_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0029_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0030",
+      "subject_id": "subj_004",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0030_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0030_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0031",
+      "subject_id": "subj_005",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0031_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0031_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0032",
+      "subject_id": "subj_006",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0032_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0032_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0033",
+      "subject_id": "subj_007",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0033_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0033_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0034",
+      "subject_id": "subj_008",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0034_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0034_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0035",
+      "subject_id": "subj_009",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0035_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0035_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0036",
+      "subject_id": "subj_010",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0036_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0036_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0037",
+      "subject_id": "subj_011",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0037_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0037_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0038",
+      "subject_id": "subj_012",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0038_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0038_msk.npy",
+      "label": 0,
+      "domain": "synthetic"
+    },
+    {
+      "sample_id": "syn_0039",
+      "subject_id": "subj_000",
+      "dataset": "synthetic",
+      "image_path": "data/processed/synthetic/syn_0039_img.npy",
+      "mask_path": "data/processed/synthetic/syn_0039_msk.npy",
+      "label": 1,
+      "domain": "synthetic"
+    }
+  ],
+  "folds": [
+    {
+      "fold": 0,
+      "train_ids": [
+        "syn_0001",
+        "syn_0003",
+        "syn_0004",
+        "syn_0005",
+        "syn_0008",
+        "syn_0009",
+        "syn_0010",
+        "syn_0012",
+        "syn_0014",
+        "syn_0016",
+        "syn_0017",
+        "syn_0018",
+        "syn_0021",
+        "syn_0022",
+        "syn_0023",
+        "syn_0025",
+        "syn_0027",
+        "syn_0029",
+        "syn_0030",
+        "syn_0031",
+        "syn_0034",
+        "syn_0035",
+        "syn_0036",
+        "syn_0038"
+      ],
+      "val_ids": [
+        "syn_0002",
+        "syn_0006",
+        "syn_0015",
+        "syn_0019",
+        "syn_0028",
+        "syn_0032"
+      ],
+      "test_ids": [
+        "syn_0000",
+        "syn_0007",
+        "syn_0011",
+        "syn_0013",
+        "syn_0020",
+        "syn_0024",
+        "syn_0026",
+        "syn_0033",
+        "syn_0037",
+        "syn_0039"
+      ]
+    },
+    {
+      "fold": 1,
+      "train_ids": [
+        "syn_0001",
+        "syn_0002",
+        "syn_0004",
+        "syn_0005",
+        "syn_0007",
+        "syn_0009",
+        "syn_0010",
+        "syn_0011",
+        "syn_0014",
+        "syn_0015",
+        "syn_0017",
+        "syn_0018",
+        "syn_0020",
+        "syn_0022",
+        "syn_0023",
+        "syn_0024",
+        "syn_0027",
+        "syn_0028",
+        "syn_0030",
+        "syn_0031",
+        "syn_0033",
+        "syn_0035",
+        "syn_0036",
+        "syn_0037"
+      ],
+      "val_ids": [
+        "syn_0000",
+        "syn_0008",
+        "syn_0013",
+        "syn_0021",
+        "syn_0026",
+        "syn_0034",
+        "syn_0039"
+      ],
+      "test_ids": [
+        "syn_0003",
+        "syn_0006",
+        "syn_0012",
+        "syn_0016",
+        "syn_0019",
+        "syn_0025",
+        "syn_0029",
+        "syn_0032",
+        "syn_0038"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_ids": [
+        "syn_0001",
+        "syn_0003",
+        "syn_0005",
+        "syn_0006",
+        "syn_0007",
+        "syn_0009",
+        "syn_0010",
+        "syn_0012",
+        "syn_0014",
+        "syn_0016",
+        "syn_0018",
+        "syn_0019",
+        "syn_0020",
+        "syn_0022",
+        "syn_0023",
+        "syn_0025",
+        "syn_0027",
+        "syn_0029",
+        "syn_0031",
+        "syn_0032",
+        "syn_0033",
+        "syn_0035",
+        "syn_0036",
+        "syn_0038"
+      ],
+      "val_ids": [
+        "syn_0000",
+        "syn_0011",
+        "syn_0013",
+        "syn_0024",
+        "syn_0026",
+        "syn_0037",
+        "syn_0039"
+      ],
+      "test_ids": [
+        "syn_0002",
+        "syn_0004",
+        "syn_0008",
+        "syn_0015",
+        "syn_0017",
+        "syn_0021",
+        "syn_0028",
+        "syn_0030",
+        "syn_0034"
+      ]
+    },
+    {
+      "fold": 3,
+      "train_ids": [
+        "syn_0002",
+        "syn_0003",
+        "syn_0004",
+        "syn_0005",
+        "syn_0006",
+        "syn_0008",
+        "syn_0009",
+        "syn_0012",
+        "syn_0015",
+        "syn_0016",
+        "syn_0017",
+        "syn_0018",
+        "syn_0019",
+        "syn_0021",
+        "syn_0022",
+        "syn_0025",
+        "syn_0028",
+        "syn_0029",
+        "syn_0030",
+        "syn_0031",
+        "syn_0032",
+        "syn_0034",
+        "syn_0035",
+        "syn_0038"
+      ],
+      "val_ids": [
+        "syn_0000",
+        "syn_0007",
+        "syn_0011",
+        "syn_0013",
+        "syn_0020",
+        "syn_0024",
+        "syn_0026",
+        "syn_0033",
+        "syn_0037",
+        "syn_0039"
+      ],
+      "test_ids": [
+        "syn_0001",
+        "syn_0010",
+        "syn_0014",
+        "syn_0023",
+        "syn_0027",
+        "syn_0036"
+      ]
+    },
+    {
+      "fold": 4,
+      "train_ids": [
+        "syn_0001",
+        "syn_0003",
+        "syn_0004",
+        "syn_0006",
+        "syn_0007",
+        "syn_0010",
+        "syn_0011",
+        "syn_0012",
+        "syn_0014",
+        "syn_0016",
+        "syn_0017",
+        "syn_0019",
+        "syn_0020",
+        "syn_0023",
+        "syn_0024",
+        "syn_0025",
+        "syn_0027",
+        "syn_0029",
+        "syn_0030",
+        "syn_0032",
+        "syn_0033",
+        "syn_0036",
+        "syn_0037",
+        "syn_0038"
+      ],
+      "val_ids": [
+        "syn_0000",
+        "syn_0002",
+        "syn_0008",
+        "syn_0013",
+        "syn_0015",
+        "syn_0021",
+        "syn_0026",
+        "syn_0028",
+        "syn_0034",
+        "syn_0039"
+      ],
+      "test_ids": [
+        "syn_0005",
+        "syn_0009",
+        "syn_0018",
+        "syn_0022",
+        "syn_0031",
+        "syn_0035"
+      ]
+    }
+  ],
+  "splits_sha256": "52b51aa33e93f42e"
+}

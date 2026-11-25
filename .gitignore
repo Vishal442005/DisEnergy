@@ -1,0 +1,41 @@
+# Python & virtualenvs
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Datasets & large experiment outputs
+data/raw/
+data/processed/
+outputs/
+checkpoints/
+*.nii
+*.nii.gz
+*.npz
+*.pth
+*.pt
+*.onnx
+*.parquet
+
+# LaTeX build artifacts
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/*.abs
+paper/*.spl
+
+# OS & editor
+.DS_Store
+Thumbs.db
+*.swp
+Give complete researcb plan.docx
