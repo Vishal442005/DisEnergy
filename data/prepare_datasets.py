@@ -582,6 +582,37 @@ def prepare_ph2(raw_dir: Path, out_dir: Path, image_size: int = 256, max_samples
     return records
 
 
+def prepare_whu(raw_dir: Path, out_dir: Path, image_size: int = 256, max_samples: int | None = None) -> list[SampleRecord]:
+    """Preprocess WHU Building remote sensing images + building masks."""
+    records: list[SampleRecord] = []
+    for img_path in sorted(raw_dir.rglob("*.png")):
+        if "Mask" in img_path.parts or "mask" in img_path.parts:
+            continue
+        msk_path = Path(str(img_path).replace("/Image/", "/Mask/"))
+        if not msk_path.exists():
+            continue
+        img = np.asarray(Image.open(img_path).convert("RGB"), dtype=np.float32) / 255.0
+        msk = _binarize_mask(np.asarray(Image.open(msk_path).convert("L")))
+        sid = f"whu_{img_path.stem}"
+        img_p, msk_p = _save_pair(out_dir, sid, img, msk, image_size=image_size)
+        records.append(
+            SampleRecord(
+                sample_id=sid,
+                subject_id=sid,
+                dataset="whu",
+                image_path=img_p,
+                mask_path=msk_p,
+                label=1 if np.any(msk) else 0,
+                domain="remote_sensing",
+            )
+        )
+        if max_samples is not None and len(records) >= max_samples:
+            break
+    if not records:
+        raise FileNotFoundError(f"No WHU Image/Mask pairs found under {raw_dir}")
+    return records
+
+
 def build_leak_free_nested_splits(
     records: Sequence[SampleRecord],
     n_folds: int = 5,
@@ -690,6 +721,8 @@ def main() -> None:
         records = prepare_eurosat(ds_raw, ds_out, image_size=args.image_size, max_samples=args.max_samples or 1000)
     elif args.dataset == "ph2_ood":
         records = prepare_ph2(ds_raw, ds_out, image_size=args.image_size, max_samples=args.max_samples)
+    elif args.dataset == "whu":
+        records = prepare_whu(ds_raw, ds_out, image_size=args.image_size, max_samples=args.max_samples)
     else:
         raise NotImplementedError(
             f"Place raw '{args.dataset}' archive under {ds_raw} and wire its folder adapter."

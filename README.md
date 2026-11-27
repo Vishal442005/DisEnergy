@@ -20,19 +20,38 @@
 
 ---
 
+## Verified Real-Benchmark Summary (8 Datasets Across 4 Domains)
+
+| Domain | Dataset | Task | Key Verified Result (CPU Suite) |
+| :--- | :--- | :--- | :--- |
+| **Natural Scenes** | ECSSD (`1,000`) | Zero-shot saliency & noise/affine stress | `0.337` Boundary F1 (#1), `0.951` Spec (#1); **#1 at 10 dB noise** (`0.546–0.586` DSC) & **#1 across all affine shifts** |
+| **Biomedical (Retinal)** | DRIVE (`40`) | Fine-scale vessels ($w_{\mathrm{F}}=1$) + Regime 2 scarcity | `DisEnergy_Green`: `0.233` Boundary F1 (#1, >4× baselines), `55.19 px` HD95 (#1); `DisEnergyNet` beats U-Net/AttnU-Net at 25% labels |
+| **Biomedical (Dermoscopy)** | ISIC 2018 (`100`) | Zero-shot lesion segmentation | `0.518` DSC, `0.410` IoU, `0.960` Specificity (beats Wavelet `0.432`, Chan-Vese `0.416`, Gabor `0.331`) |
+| **Biomedical (Dermoscopy)** | PH2 (`200`) | 3-class TDA classification | `DisEnergy_TDA_MLP`: `0.494` Macro-F1 / `0.653` AUROC (vs. `HOG+SVM` `0.380` Macro-F1) |
+| **Biomedical (Ultrasound)** | BUSI (`927`) | Tumor AUROC & 5% scarcity | `0.733` pixel-level tumor AUROC zero-shot; `DisEnergyNet` `0.126` vs. `UNet` `0.001` DSC at 5% labels |
+| **Industrial Inspection** | MVTec AD (`436`) | Surface defect localization | `0.162` DSC, `0.869` Specificity (#1 across all 5 methods) |
+| **Remote Sensing** | WHU Building (`150`) | Zero-shot building extraction | `0.870` Specificity (#1 across all 6 methods), `0.265` DSC |
+| **Remote Sensing** | EuroSAT (`1,000`) | 10-class TDA scene classification | `DisEnergy_TDA_RF`: `0.494` Macro-F1, `0.873` AUROC, top MCC (`0.448`) |
+
+- **Efficiency ($256 \times 256$ on i5-1335U CPU):** `0` trainable params, **`20.63 ± 1.40 ms`** per image (`4.6×` faster than U-Net).
+
+---
+
 ## Repository Structure
 
 ```text
 DisEnergy/
-├── configs/default.yaml          # Operator, TDA, and benchmark configuration
+├── configs/                      # default.yaml + ci_workflow.yml reference
 ├── disenergy/                    # Core 2D/3D operator, TDA, classifiers, hybrid wrapper
 ├── baselines/                    # Classical math + 4GB-VRAM DL + SAM/DINOv2 wrappers
 ├── data/prepare_datasets.py      # Standardized preprocessing & leak-free nested 5-fold splits
-├── experiments/                  # Pilot, inner-fold ablations, benchmarks, compute profiler
+├── experiments/                  # Pilot, ablations, full local suite, scarcity, profiling
 ├── analysis/                     # Metrics Reloaded, Wilcoxon+Holm, Friedman+Nemenyi, LaTeX, figures
 ├── tests/                        # Theorems 1–5 verification, phantom tests, leakage tests
-├── notebooks/demo_3d_manifold.ipynb
-└── paper/                        # Elsevier cas-sc LaTeX manuscript, proofs, cover letter
+├── notebooks/
+│   ├── demo_3d_manifold.ipynb
+│   └── colab_gpu_benchmarks.ipynb # Turnkey T4/A100 GPU runner (DL scarcity, SAM/DINOv2, BraTS)
+└── paper/                        # Elsevier elsarticle LaTeX source, appendix proofs, compiled PDF
 ```
 
 ---
@@ -43,12 +62,14 @@ DisEnergy/
 # 1. Run all theorem, TDA, leakage, and core tests
 pytest -v
 
-# 2. Generate synthetic multi-subject leak-free benchmark & run end-to-end pipeline
+# 2. Synthetic smoke benchmark
 python data/prepare_datasets.py --dataset synthetic --n-samples 60 --image-size 128
 python experiments/run_pilot.py --max-samples 60
-python experiments/run_ablations.py
 python experiments/run_benchmarks.py --max-test-samples 12
-python experiments/profile_compute.py --image-size 256
+
+# 3. Full local real-dataset benchmarks (after data/prepare_datasets.py)
+python experiments/run_full_local_suite.py
+python experiments/run_whu_isic_and_scarcity.py
 ```
 
 ---
