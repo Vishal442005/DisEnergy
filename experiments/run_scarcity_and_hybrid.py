@@ -67,7 +67,11 @@ def run_scarcity_suite(
                 seed=seed,
             )
             with torch.no_grad():
-                probs = torch.sigmoid(trained(x_te_t)).squeeze(1).cpu().numpy()
+                probs_list = []
+                for start in range(0, len(x_te_t), 8):
+                    batch = x_te_t[start : start + 8]
+                    probs_list.append(torch.sigmoid(trained(batch)).squeeze(1).cpu().numpy())
+                probs = np.concatenate(probs_list, axis=0)
             for j, sid in enumerate(test_ids):
                 pred = probs[j] >= 0.5
                 m = compute_segmentation_metrics(pred, y_te[j])
